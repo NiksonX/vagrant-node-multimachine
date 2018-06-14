@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "node" do |node| #node app server block
-      node.vm.box = "bonto/ubuntu-16.04"
+      node.vm.box = "bento/ubuntu-16.04"
       node.vm.network "forwarded_port", guest:3000, host:8080
       node.vm.provider "virtualbox" do |vb|
         vb.memory = "512"
