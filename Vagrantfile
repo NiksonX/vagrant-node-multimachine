@@ -13,7 +13,24 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.define "mongo" do |mongo|
+    mongo.vm.box = "bonto/ubuntu-16.04"
+    mongo.vm.provider "virtualbox" do |vb|
+      vb.memory = "512"
+    end
+    mongo.vm.network "private_network", ip: "192.168.33.20"
+    mongo.vm.provision "file", source: "files/mongod.conf", destination: "~/mongod.conf"
+    mongo.vm.provision "shell", path: "provisioners/install-mongo.sh"
   end
+
+  config.vm.define "node" do |node| #node app server block
+      node.vm.box = "bonto/ubuntu-16.04"
+      node.vm.network "forwarded_port", guest:3000, host:8080
+      node.vm.provider "virtualbox" do |vb|
+        vb.memory = "512"
+      end
+      node.vm.network "private_network", ip: "192.168.33.10"
+      node.vm.provision "shell", path: "provisioners/install-node.sh"  
+    end
   
   config.vm.box = "bento/ubuntuu-16.04"
 
