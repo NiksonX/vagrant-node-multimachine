@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.define "mongo" do |mongo|
-    mongo.vm.box = "bonto/ubuntu-16.04"
+    mongo.vm.box = "bento/ubuntu-16.04"
     mongo.vm.provider "virtualbox" do |vb|
       vb.memory = "512"
     end
